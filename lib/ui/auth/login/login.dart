@@ -1,11 +1,13 @@
+import 'package:app1/main.dart';
 import 'package:app1/ui/auth/login/cubit/loginCubit.dart';
 import 'package:app1/ui/auth/login/cubit/loginStates.dart';
-import 'package:app1/ui/homepage.dart';
+import 'package:app1/ui/home/homepage.dart';
 import 'package:app1/ui/utils/dialogUtils.dart';
 import 'package:app1/ui/widgets/customwidget.dart';
 import 'package:app1/ui/auth/register/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Login extends StatefulWidget {
   static const String routename = "login";
@@ -50,7 +52,7 @@ class _LoginState extends State<Login> {
           children: [
             Center(child: Image.asset('assets/Group 5.png')),
             SizedBox(
-              height: 40,
+              height: 40.h,
             ),
             Text(
               "Welcome Back to route",
@@ -64,7 +66,7 @@ class _LoginState extends State<Login> {
               style: TextStyle(fontSize: 16, color: Colors.white),
             ),
             SizedBox(
-              height: 70,
+              height: 70.h,
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -154,7 +156,7 @@ class _LoginState extends State<Login> {
                     ],
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 30.h,
                   ),
                   Center(
                     child: ElevatedButton(
@@ -175,7 +177,7 @@ class _LoginState extends State<Login> {
               ),
             ),
             SizedBox(
-              height: 30,
+              height: 30.h,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
