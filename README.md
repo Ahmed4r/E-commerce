@@ -1,6 +1,6 @@
-# app1
+# E-commmerce 
 
-A new Flutter project.
+A new Flutter project. using bloc 
 
 ## Getting Started
 
