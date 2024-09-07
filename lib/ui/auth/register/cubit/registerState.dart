@@ -1,4 +1,4 @@
-import 'package:app1/data/model/RegisterResponse.dart';
+import 'package:app1/data/model/register/RegisterResponse.dart';
 
 abstract class Registerstates {}
 

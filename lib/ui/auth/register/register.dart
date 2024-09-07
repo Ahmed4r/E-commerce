@@ -1,4 +1,7 @@
+import 'package:app1/ui/auth/login/login.dart';
 import 'package:app1/ui/auth/register/cubit/registerState.dart';
+import 'package:app1/ui/utils/appTheme.dart';
+import 'package:app1/ui/utils/appcolors.dart';
 import 'package:app1/ui/utils/dialogUtils.dart';
 import 'package:app1/ui/widgets/customwidget.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +34,6 @@ class _RegisterState extends State<Register> {
           Dialogutils.hideLoading(context);
           Dialogutils.showMessage(
               context: context, content: 'register success');
-          
         }
       },
       child: Scaffold(
@@ -233,7 +235,7 @@ class _RegisterState extends State<Register> {
                           color: Color(0xff004182),
                         ),
                       )),
-                )
+                ),
               ],
             ),
           ),

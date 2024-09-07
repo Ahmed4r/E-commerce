@@ -1,3 +1,6 @@
+import 'package:app1/mybloc_observer.dart';
+import 'package:app1/ui/auth/login/cubit/loginCubit.dart';
+import 'package:app1/ui/auth/login/cubit/loginStates.dart';
 import 'package:app1/ui/auth/register/cubit/regcubit.dart';
 import 'package:app1/ui/homepage.dart';
 import 'package:app1/ui/auth/login/login.dart';
@@ -13,14 +16,13 @@ class myapp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BlocProvider(
-        create: (context) => RegisterCubit(),
-        child: Register(),
-      ),
       initialRoute: Splashscreen.routename,
       routes: {
         Splashscreen.routename: (context) => const Splashscreen(),
-        Login.routename: (context) => const Login(),
+        Login.routename: (context) => BlocProvider(
+              create: (context) => Logincubit(),
+              child: Login(),
+            ),
         Register.routename: (context) => BlocProvider(
               create: (context) => RegisterCubit(),
               child: Register(),
@@ -32,5 +34,6 @@ class myapp extends StatelessWidget {
 }
 
 void main() {
+  Bloc.observer = MyBlocObserver();
   runApp(const myapp());
 }
