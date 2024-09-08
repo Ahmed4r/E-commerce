@@ -1,10 +1,12 @@
+import 'package:app1/data/model/category/CategoryOrBrandResponse.dart';
 import 'package:app1/main.dart';
 import 'package:app1/ui/widgets/catorbrandItem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomCategoriesGridView extends StatelessWidget {
-  CustomCategoriesGridView({super.key});
+  List<CategoryOrBrands> CategoriesList;
+  CustomCategoriesGridView({required this.CategoriesList});
 
   @override
   Widget build(BuildContext context) {
@@ -12,11 +14,14 @@ class CustomCategoriesGridView extends StatelessWidget {
       height: 200.h,
       child: GridView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: 10,
+        itemCount: CategoriesList.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, mainAxisSpacing: 16, crossAxisSpacing: 16),
         itemBuilder: (context, index) {
-          return Catorbranditem();
+          return Catorbranditem(
+            list: CategoriesList[index],
+          );
+          //list: CategoriesList[index]
         },
       ),
     );

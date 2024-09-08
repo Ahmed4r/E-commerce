@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'package:app1/data/model/category/CategoryOrBrandResponse.dart';
 import 'package:app1/data/model/register/RegisterRequest.dart';
 import 'package:app1/data/model/register/RegisterResponse.dart';
 import 'package:app1/data/EndPoints.dart';
 import 'package:app1/data/model/signin/SinginRequest.dart';
 import 'package:app1/data/model/signin/SinginResponse.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 class ApiManager {
   // https://ecommerce.routemisr.com/api/v1/auth/signup
@@ -40,7 +42,17 @@ class ApiManager {
       var bodyString = response.body;
       var json = jsonDecode(bodyString);
       return RegisterResponse.fromJson(json);
-      // return RegisterResponse.fromJson(jsonEncode(response.body));
+      // return RegisterResponse.fromJson(jsonDecode(response.body));
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  static Future<CategoryOrBrandResponse> getAllCategories() async {
+    try {
+      Uri url = Uri.https(baseUrl, EndPoints.getAllCategories);
+      var response = await http.get(url);
+      return CategoryOrBrandResponse.fromJson(jsonDecode(response.body));
     } catch (e) {
       throw e;
     }

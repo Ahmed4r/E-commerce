@@ -31,7 +31,7 @@ class myapp extends StatelessWidget {
                 create: (context) => RegisterCubit(),
                 child: Register(),
               ),
-          Homepage.routeName: (context) => const Homepage()
+          Homepage.routeName: (context) => Homepage()
         },
       ),
     );

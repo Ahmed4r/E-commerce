@@ -33,6 +33,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   flutter_screenutil: ^5.9.3
   flutter_image_slideshow: ^0.1.6
+  cached_network_image: ^3.4.1
 
 
   # The following adds the Cupertino Icons font to your application.
