@@ -4,6 +4,7 @@ import 'package:app1/ui/home/cubit/hometabViewModel.dart';
 import 'package:app1/ui/widgets/announc.dart';
 import 'package:app1/ui/widgets/categoriesorBrand_section.dart';
 import 'package:app1/ui/widgets/customsearch.dart';
+
 import 'package:app1/ui/widgets/gridviewCat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +22,9 @@ class _HometabState extends State<Hometab> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<Hometabviewmodel, HomeScreenstates>(
-      bloc: viewmodel..getAllCategories(),
+      bloc: viewmodel
+        ..getAllCategories()
+        ..getAllBrands(),
       builder: (context, state) {
         return Scaffold(
           body: SingleChildScrollView(
@@ -44,14 +47,13 @@ class _HometabState extends State<Hometab> {
                             child: CircularProgressIndicator(),
                           )
                         : CustomCategoriesGridView(
-                            CategoriesList: viewmodel.categoryList,
+                            list: viewmodel.categoryList,
                           ),
                     SizedBox(
                       height: 20.h,
                     ),
                     RowsectiobWidget(name: 'Brands'),
-                    CustomCategoriesGridView(
-                        CategoriesList: viewmodel.categoryList),
+                    CustomCategoriesGridView(list: viewmodel.brandslist),
                   ]),
             ),
           ),

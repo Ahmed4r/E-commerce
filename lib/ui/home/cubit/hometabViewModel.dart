@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class Hometabviewmodel extends Cubit<HomeScreenstates> {
   Hometabviewmodel() : super(HomeTabInitalState());
   List<CategoryOrBrands> categoryList = [];
+  List<CategoryOrBrands> brandslist = [];
 
   //hold data - handl logic
 
@@ -20,6 +21,24 @@ class Hometabviewmodel extends Cubit<HomeScreenstates> {
         print('error');
       } else {
         categoryList = response.data ?? [];
+        emit(HometabSuccessStates(response: response));
+        print('done');
+      }
+    } catch (e) {
+      throw (e.toString());
+      // print(e);
+    }
+  }
+
+  void getAllBrands() async {
+    try {
+      emit(HomeTabLoadingState());
+      var response = await ApiManager.getAllBrands();
+      if (response.statusMsg == 'fail') {
+        emit(HometabErrostates(errorMessage: response.message!));
+        print('error');
+      } else {
+        brandslist = response.data ?? [];
         emit(HometabSuccessStates(response: response));
         print('done');
       }

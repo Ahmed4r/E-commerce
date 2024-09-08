@@ -32,10 +32,10 @@ class Customsearch extends StatelessWidget {
                 ),
                 hintText: 'what do you search for?',
                 hintStyle:
-                    TextStyle(color: Appcolors.searchtextColor, fontSize: 20),
+                    TextStyle(color: Appcolors.searchtextColor, fontSize: 15),
                 prefixIcon: Icon(
                   Icons.search,
-                  size: 35,
+                  size: 25,
                   color: Appcolors.primaryColor,
                 ),
               ))),
