@@ -14,7 +14,7 @@ class _SplashscreenState extends State<Splashscreen> {
   void initState() {
     super.initState();
     Future.delayed(
-      Duration(seconds: 2),
+      Duration(seconds: 4),
       () {
         Navigator.pushReplacementNamed(context, Login.routename);
       },

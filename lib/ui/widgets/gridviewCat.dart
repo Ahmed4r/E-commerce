@@ -1,5 +1,4 @@
 import 'package:app1/data/model/category/CategoryOrBrandResponse.dart';
-import 'package:app1/main.dart';
 import 'package:app1/ui/widgets/catorbrandItem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

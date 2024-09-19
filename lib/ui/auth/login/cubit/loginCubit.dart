@@ -1,14 +1,13 @@
 import 'package:app1/data/api_manager.dart';
 import 'package:app1/ui/auth/login/cubit/loginStates.dart';
-import 'package:app1/ui/auth/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Logincubit extends Cubit<Loginstates> {
   Logincubit() : super(LoginInitalState());
   final loginformKey = GlobalKey<FormState>();
-  final nameController = TextEditingController(text: 'ahmedmutti@gmail.com');
-  final PasswordController = TextEditingController(text: 'Ahmed@123');
+  final nameController = TextEditingController(text: 'ahmedrady03@gmail.com');
+  final PasswordController = TextEditingController(text: 'Ahmed@1234');
   bool secure = true;
 
   // todo : hold data - handle logic

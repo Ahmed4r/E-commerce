@@ -1,18 +1,22 @@
 import 'package:app1/mybloc_observer.dart';
 import 'package:app1/ui/auth/login/cubit/loginCubit.dart';
-import 'package:app1/ui/auth/login/cubit/loginStates.dart';
 import 'package:app1/ui/auth/register/cubit/regcubit.dart';
-import 'package:app1/ui/home/Hometab.dart';
+
 import 'package:app1/ui/home/homepage.dart';
 import 'package:app1/ui/auth/login/login.dart';
 import 'package:app1/ui/auth/register/register.dart';
+import 'package:app1/ui/home/productDeatils/product_details.dart';
+import 'package:app1/ui/home/productlist/cubit/product_tab_viewmodel.dart';
 import 'package:app1/ui/splashscreen/splashScreen.dart';
+import 'package:app1/ui/utils/sharedPrefUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class myapp extends StatelessWidget {
-  const myapp({super.key});
+  String route;
+  myapp({required this.route});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +24,7 @@ class myapp extends StatelessWidget {
       designSize: Size(430, 932),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: Homepage.routeName,
+        initialRoute: route,
         routes: {
           Splashscreen.routename: (context) => const Splashscreen(),
           Login.routename: (context) => BlocProvider(
@@ -31,14 +35,32 @@ class myapp extends StatelessWidget {
                 create: (context) => RegisterCubit(),
                 child: Register(),
               ),
-          Homepage.routeName: (context) => Homepage()
+          Homepage.routeName: (context) => Homepage(),
+          ProductDetails.routename: (context) => ProductDetails(),
         },
       ),
     );
   }
 }
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
-  runApp(const myapp());
+  await Sharedprefutils.init();
+  String route;
+  var token = Sharedprefutils.getData(key: 'token');
+  if (token == null) {
+    route = Login.routename;
+  } else {
+    route = Homepage.routeName;
+  }
+  runApp(MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ProductTabViewmodel(),
+        ),
+      ],
+      child: myapp(
+        route: route,
+      )));
 }

@@ -1,8 +1,9 @@
-import 'package:app1/main.dart';
 import 'package:app1/ui/auth/login/cubit/loginCubit.dart';
 import 'package:app1/ui/auth/login/cubit/loginStates.dart';
 import 'package:app1/ui/home/homepage.dart';
+
 import 'package:app1/ui/utils/dialogUtils.dart';
+import 'package:app1/ui/utils/sharedPrefUtils.dart';
 import 'package:app1/ui/widgets/customwidget.dart';
 import 'package:app1/ui/auth/register/register.dart';
 import 'package:flutter/material.dart';
@@ -33,9 +34,11 @@ class _LoginState extends State<Login> {
               context: context, content: state.errorMessage);
         } else if (state is LoginSuccessState) {
           Dialogutils.hideLoading(context);
-          Dialogutils.showMessage(context: context, content: 'login success');
+          Dialogutils.showMessage(
+              context: context, content: 'login success', title: "success");
+          Sharedprefutils.saveData(key: 'token', value: state.response.token);
 
-          Navigator.pushNamed(context, Homepage.routeName);
+          Navigator.pushReplacementNamed(context, Homepage.routeName);
         }
       },
       child: Scaffold(

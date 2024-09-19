@@ -1,7 +1,7 @@
 import 'package:app1/data/api_manager.dart';
 import 'package:app1/data/model/category/CategoryOrBrandResponse.dart';
 
-import 'package:app1/ui/home/cubit/hometabStates.dart';
+import 'package:app1/ui/home/hometab/cubit/hometabStates.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 

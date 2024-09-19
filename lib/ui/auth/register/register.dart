@@ -1,7 +1,4 @@
-import 'package:app1/ui/auth/login/login.dart';
 import 'package:app1/ui/auth/register/cubit/registerState.dart';
-import 'package:app1/ui/utils/appTheme.dart';
-import 'package:app1/ui/utils/appcolors.dart';
 import 'package:app1/ui/utils/dialogUtils.dart';
 import 'package:app1/ui/widgets/customwidget.dart';
 import 'package:flutter/material.dart';

@@ -1,10 +1,16 @@
+import 'package:app1/ui/home/productlist/cubit/product_tab_viewmodel.dart';
 import 'package:app1/ui/utils/appcolors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Customsearch extends StatelessWidget {
-  const Customsearch({super.key});
+class CustomsearchProduct extends StatefulWidget {
+  CustomsearchProduct({super.key});
 
+  @override
+  State<CustomsearchProduct> createState() => _CustomsearchProductState();
+}
+
+class _CustomsearchProductState extends State<CustomsearchProduct> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -38,12 +44,21 @@ class Customsearch extends StatelessWidget {
                   color: Appcolors.primaryColor,
                 ),
               ))),
-              IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.shopping_cart_outlined,
+              InkWell(
+                child: Badge(
+                  label: Text(ProductTabViewmodel.get(context)
+                      .numOfCartItems
+                      .toString()),
+                  child: ImageIcon(
+                    AssetImage('assets/cart.png'),
+                    size: 28.sp,
                     color: Appcolors.primaryColor,
-                  ))
+                  ),
+                ),
+                onTap: () {
+                  // Navigator.of(context).pushNamed(cart.routename);
+                },
+              )
             ],
           ),
         ],

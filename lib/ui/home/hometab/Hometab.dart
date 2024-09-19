@@ -1,6 +1,5 @@
-import 'package:app1/data/model/category/CategoryOrBrandResponse.dart';
-import 'package:app1/ui/home/cubit/hometabStates.dart';
-import 'package:app1/ui/home/cubit/hometabViewModel.dart';
+import 'package:app1/ui/home/hometab/cubit/hometabStates.dart';
+import 'package:app1/ui/home/hometab/cubit/hometabViewModel.dart';
 import 'package:app1/ui/widgets/announc.dart';
 import 'package:app1/ui/widgets/categoriesorBrand_section.dart';
 import 'package:app1/ui/widgets/customsearch.dart';

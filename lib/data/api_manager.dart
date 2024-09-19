@@ -1,12 +1,16 @@
 import 'dart:convert';
+import 'package:app1/data/Failures.dart';
+import 'package:app1/data/model/AddToCart/AddToCartResponse.dart';
 import 'package:app1/data/model/category/CategoryOrBrandResponse.dart';
+import 'package:app1/data/model/productTab/ProductResponse.dart';
 import 'package:app1/data/model/register/RegisterRequest.dart';
 import 'package:app1/data/model/register/RegisterResponse.dart';
 import 'package:app1/data/EndPoints.dart';
 import 'package:app1/data/model/signin/SinginRequest.dart';
 import 'package:app1/data/model/signin/SinginResponse.dart';
+import 'package:app1/ui/utils/sharedPrefUtils.dart';
+import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
 
 class ApiManager {
   // https://ecommerce.routemisr.com/api/v1/auth/signup
@@ -57,6 +61,7 @@ class ApiManager {
       throw e;
     }
   }
+
   static Future<CategoryOrBrandResponse> getAllBrands() async {
     try {
       Uri url = Uri.https(baseUrl, EndPoints.getAllBrands);
@@ -64,6 +69,38 @@ class ApiManager {
       return CategoryOrBrandResponse.fromJson(jsonDecode(response.body));
     } catch (e) {
       throw e;
+    }
+  }
+
+  static Future<ProductResponse> getAllProducts() async {
+    try {
+      Uri url = Uri.https(baseUrl, EndPoints.getAllProductlist);
+      var response = await http.get(url);
+      return ProductResponse.fromJson(jsonDecode(response.body));
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  static Future<Either<Failures, AddToCartResponse>> addCartData(
+      String productId) async {
+    Uri url = Uri.https(baseUrl, EndPoints.addToCart);
+
+    try {
+      var token = Sharedprefutils.getData(key: 'token');
+      var response = await http.post(url,
+          body: {'productId': productId}, headers: {'token': token.toString()});
+      var bodyString = response.body;
+      var json = jsonDecode(bodyString);
+      var addToCartResponse = AddToCartResponse.fromJson(json);
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Right(addToCartResponse);
+      } else {
+        return Left(ServerError(errorMessage: addToCartResponse.message!));
+      }
+    } catch (e) {
+      return Left(NetworkError(errorMessage: "No Internet Connection"));
     }
   }
 }
