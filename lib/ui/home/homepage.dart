@@ -1,4 +1,4 @@
-import 'package:app1/ui/home/FavoriteTab.dart';
+import 'package:app1/ui/home/Favorites/WishList.dart';
 import 'package:app1/ui/home/hometab/Hometab.dart';
 import 'package:app1/ui/home/ProfileTab.dart';
 import 'package:app1/ui/home/productlist/product_list_tab.dart';

@@ -9,6 +9,8 @@ import 'package:app1/data/model/register/RegisterResponse.dart';
 import 'package:app1/data/EndPoints.dart';
 import 'package:app1/data/model/signin/SinginRequest.dart';
 import 'package:app1/data/model/signin/SinginResponse.dart';
+import 'package:app1/data/model/wichlist/addtowichlistResponse.dart';
+import 'package:app1/data/model/wichlist/getwichlist.dart';
 import 'package:app1/ui/utils/sharedPrefUtils.dart';
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
@@ -125,6 +127,26 @@ class ApiManager {
     }
   }
 
+  static Future<Either<Failures, getWichListResponse>> getWichlist() async {
+    Uri url = Uri.https(baseUrl, EndPoints.getWichList);
+
+    try {
+      var token = Sharedprefutils.getData(key: 'token');
+      var response = await http.get(url, headers: {'token': token.toString()});
+      var bodyString = response.body;
+      var json = jsonDecode(bodyString);
+      var getWichListresponse = getWichListResponse.fromJson(json);
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Right(getWichListresponse);
+      } else {
+        return Left(ServerError(errorMessage: getWichListresponse.status!));
+      }
+    } catch (e) {
+      return Left(NetworkError(errorMessage: 'error'));
+    }
+  }
+
   static Future<Either<Failures, GetCartResponse>> deleteItemInCart(
       String productId) async {
     Uri url = Uri.https(baseUrl, '/api/v1/cart/${productId}');
@@ -168,4 +190,70 @@ class ApiManager {
       return Left(NetworkError(errorMessage: 'error'));
     }
   }
+
+  static Future<Either<Failures, GetCartResponse>> getUserInfo(
+      String productId, int count) async {
+    Uri url = Uri.https(baseUrl, '/api/v1/cart/${productId}');
+
+    try {
+      var token = Sharedprefutils.getData(key: 'token');
+      var response = await http.put(url,
+          body: {'count': '${count}'}, headers: {'token': token.toString()});
+      var bodyString = response.body;
+      var json = jsonDecode(bodyString);
+      var updateCountInCart = GetCartResponse.fromJson(json);
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Right(updateCountInCart);
+      } else {
+        return Left(ServerError(errorMessage: updateCountInCart.message!));
+      }
+    } catch (e) {
+      return Left(NetworkError(errorMessage: 'error'));
+    }
+  }
+
+  static Future<Either<Failures, AddtoWichListResponse>> addWishlist(
+      String productId) async {
+    Uri url = Uri.https(baseUrl, EndPoints.addWichList);
+
+    try {
+      var token = Sharedprefutils.getData(key: 'token');
+      var response = await http.post(url,
+          body: {'productId': productId}, headers: {'token': token.toString()});
+      var bodyString = response.body;
+      var json = jsonDecode(bodyString);
+      var addWichlistresponse = AddtoWichListResponse.fromJson(json);
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Right(addWichlistresponse);
+      } else {
+        return Left(ServerError(errorMessage: addWichlistresponse.message!));
+      }
+    } catch (e) {
+      return Left(NetworkError(errorMessage: "No Internet Connection"));
+    }
+  }
+
+  // static Future<Either<Failures, AddtoWichListResponse>> addWichlist(
+  //     String productId) async {
+  //   Uri url = Uri.https(baseUrl, EndPoints.addToCart);
+
+  //   try {
+  //     var token = Sharedprefutils.getData(key: 'token');
+  //     var response = await http.post(url,
+  //         body: {'productId': productId}, headers: {'token': token.toString()});
+  //     var bodyString = response.body;
+  //     var json = jsonDecode(bodyString);
+  //     var addWichlistresponse = AddtoWichListResponse.fromJson(json);
+
+  //     if (response.statusCode >= 200 && response.statusCode < 300) {
+  //       return Right(addWichlistresponse);
+  //     } else {
+  //       return Left(ServerError(errorMessage: addWichlistresponse.message!));
+  //     }
+  //   } catch (e) {
+  //     return Left(NetworkError(errorMessage: 'error'));
+  //   }
+  // }
 }

@@ -1,4 +1,5 @@
 import 'package:app1/data/model/productTab/ProductResponse.dart';
+import 'package:app1/ui/home/Favorites/WishList.dart';
 import 'package:app1/ui/home/productlist/cubit/product_tab_viewmodel.dart';
 import 'package:app1/ui/utils/appcolors.dart';
 import 'package:flutter/material.dart';
@@ -40,10 +41,24 @@ class gridviewCart extends StatelessWidget {
                     child: IconButton(
                       color: Appcolors.primaryColor,
                       padding: EdgeInsets.zero,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, FavoriteTab.routeName);
+                      },
                       icon: iswhishlisted == true
-                          ? Icon(Icons.favorite_rounded)
-                          : Icon(Icons.favorite_border_outlined),
+                          ? Icon(
+                              Icons.favorite_rounded,
+                              size: 29,
+                            )
+                          : InkWell(
+                              onTap: () {
+                                ProductTabViewmodel.get(context)
+                                    .addToWichlist(data.id ?? '');
+                              },
+                              child: Icon(
+                                Icons.favorite_border_outlined,
+                                size: 29,
+                              ),
+                            ),
                     ),
                   ))
             ],

@@ -1,14 +1,46 @@
+import 'package:app1/data/model/GetFromCart/GetCart.dart';
 import 'package:app1/data/model/productTab/ProductResponse.dart';
+import 'package:app1/ui/home/cart/cartScreen.dart';
+import 'package:app1/ui/home/cart/cubit/cartviewmodel.dart';
 import 'package:app1/ui/utils/appcolors.dart';
+import 'package:app1/ui/widgets/colorWidget.dart';
+import 'package:app1/ui/widgets/sizedWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readmore/readmore.dart';
 
-class ProductDetails extends StatelessWidget {
+class ProductDetails extends StatefulWidget {
   static const String routename = 'details';
-  const ProductDetails({super.key});
+
+  @override
+  State<ProductDetails> createState() => _ProductDetailsState();
+}
+
+class _ProductDetailsState extends State<ProductDetails> {
+  Cartviewmodel viewmodel = Cartviewmodel();
+  int counter = 0;
+
+  void increaseCount() {
+    setState(() {
+      counter++;
+    });
+  }
+
+  void decreaseCount() {
+    if (counter > 1) {
+      setState(() {
+        counter--;
+      });
+    }
+  }
+
+  void toogleCheck(ispicked) {
+    setState(() {
+      ispicked = !ispicked;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,17 +79,19 @@ class ProductDetails extends StatelessWidget {
             ),
             Row(
               children: [
-                Text(
-                  '${args.title ?? ''}',
-                  // productEntity.title ?? "",
-                  style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18.sp,
-                      color: const Color(0xff06004F)),
+                Expanded(
+                  child: Text(
+                    '${args.title ?? ''}',
+                    // productEntity.title ?? "",
+                    style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18.sp,
+                        color: const Color(0xff06004F)),
+                  ),
                 ),
                 const Spacer(),
                 Text(
-                  '${args.price}',
+                  'EGP ${args.price}',
                   // productEntity.price.toString(),
                   style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w500,
@@ -96,10 +130,10 @@ class ProductDetails extends StatelessWidget {
                 Icon(
                   Icons.star,
                   color: const Color(0xffFDD835),
-                  size: 15.h,
+                  size: 35.h,
                 ),
                 Text(
-                  '${args.ratingsAverage}',
+                  '${args.ratingsAverage}(${args.ratingsQuantity})',
                   style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w400,
                       fontSize: 14.sp,
@@ -119,6 +153,9 @@ class ProductDetails extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         InkWell(
+                          onTap: () {
+                            decreaseCount();
+                          },
                           child: Container(
                             width: 22.r,
                             height: 22.r,
@@ -136,13 +173,16 @@ class ProductDetails extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '2',
+                          '${counter}',
                           style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w500,
                               fontSize: 18.sp,
                               color: Colors.white),
                         ),
                         InkWell(
+                          onTap: () {
+                            increaseCount();
+                          },
                           child: Container(
                             width: 22.r,
                             height: 22.r,
@@ -168,30 +208,67 @@ class ProductDetails extends StatelessWidget {
             SizedBox(
               height: 16.h,
             ),
-            Text(
-              'Description',
-              style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 18.sp,
-                  color: const Color(0xff06004F)),
-            ),
-            SizedBox(
-              height: 8.h,
-            ),
-            GestureDetector(
-              onTap: () {
-                // setState(() {
-                //   isExpanded = !isExpanded;
-                // });
-              },
-              child: ReadMoreText(
-                '${args.description}',
-                trimMode: TrimMode.Line,
-                trimLines: 2,
-                colorClickableText: Colors.pink,
-                trimCollapsedText: 'Show more',
-                trimExpandedText: 'Show less',
-                moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            Expanded(
+              child: Container(
+                width: 300.w,
+                height: 200.h,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        'Description',
+                        style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18.sp,
+                            color: const Color(0xff06004F)),
+                      ),
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      ReadMoreText(
+                        '${args.description}',
+                        trimMode: TrimMode.Line,
+                        trimLines: 2,
+                        colorClickableText: Colors.pink,
+                        trimCollapsedText: 'Show more',
+                        trimExpandedText: 'Show less',
+                        moreStyle: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
+                      ),
+                      Text("Sized"),
+                      Row(
+                        children: [
+                          Sizedwidget(
+                            text: '38',
+                          ),
+                          Sizedwidget(text: '39'),
+                          Sizedwidget(text: '40'),
+                          Sizedwidget(
+                            text: '41',
+                          ),
+                          Sizedwidget(
+                            text: '42',
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        children: [
+                          Colorwidget(
+                            color: Colors.black,
+                          ),
+                          Colorwidget(color: Colors.red),
+                          Colorwidget(color: Colors.blueAccent),
+                          Colorwidget(color: Colors.green),
+                          Colorwidget(color: Colors.redAccent),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
             SizedBox(
@@ -233,7 +310,12 @@ class ProductDetails extends StatelessWidget {
                       onPressed: () {},
                       child: Row(
                         children: [
-                          Icon(Icons.add_shopping_cart_outlined),
+                          InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, Cartscreen.routename);
+                              },
+                              child: Icon(Icons.add_shopping_cart_outlined)),
                           SizedBox(
                             width: 26.w,
                           ),

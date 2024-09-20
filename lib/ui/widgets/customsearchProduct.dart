@@ -17,79 +17,77 @@ class _CustomsearchProductState extends State<CustomsearchProduct> {
     // Getting the ProductTabViewmodel context for the cart count.
     final productTabViewmodel = ProductTabViewmodel.get(context);
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // App Logo or Image
-          Image.asset(
-            'assets/Group 5.png',
-            width: 66.w,
-            height: 22.h,
-            color: Appcolors.primaryColor,
-          ),
-          SizedBox(height: 6.h),
+    return
+        // Padding(
+        // padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16),
+        // child:
+        Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // App Logo or Image
+        Image.asset(
+          'assets/Group 5.png',
+          width: 66.w,
+          height: 22.h,
+          color: Appcolors.primaryColor,
+        ),
+        SizedBox(height: 6.h),
 
-          // Search Bar and Cart Icon Row
-          Row(
-            children: [
-              // Search Bar
-              Expanded(
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    hintText: 'What do you search for?',
-                    hintStyle: TextStyle(
-                      color: Appcolors.searchtextColor,
-                      fontSize: 15,
-                    ),
-                    prefixIcon: Icon(
-                      Icons.search,
-                      size: 25,
-                      color: Appcolors.primaryColor,
-                    ),
+        // Search Bar and Cart Icon Row
+        Row(
+          children: [
+            Expanded(
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  hintText: 'What do you search for?',
+                  hintStyle: TextStyle(
+                    color: Appcolors.searchtextColor,
+                    fontSize: 15,
+                  ),
+                  prefixIcon: Icon(
+                    Icons.search,
+                    size: 25,
+                    color: Appcolors.primaryColor,
                   ),
                 ),
               ),
-              SizedBox(width: 12.w),
-
-              // Cart Icon with Badge showing number of cart items
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).pushNamed(Cartscreen.routename);
-                },
-                child: Stack(
-                  alignment: Alignment.topRight,
-                  children: [
-                    // Cart Icon
-
-                    // Badge for cart count
-                    Badge(
-                      child: ImageIcon(
-                        AssetImage('assets/cart.png'),
-                        size: 28.sp,
-                        color: Appcolors.primaryColor,
-                      ),
-                      isLabelVisible: true,
-                      label: Text(
-                        '${productTabViewmodel.numOfCartItems.toString()}',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.sp,
-                        ),
-                      ),
-                      backgroundColor: Colors.red,
+            ),
+            SizedBox(width: 14.w),
+            InkWell(
+              onTap: () {
+                Navigator.of(context).pushNamed(Cartscreen.routename);
+              },
+              child: Stack(
+                alignment: Alignment.topRight,
+                children: [
+                  Badge(
+                    child: ImageIcon(
+                      AssetImage('assets/cart.png'),
+                      size: 28.sp,
+                      color: Appcolors.primaryColor,
                     ),
-                  ],
-                ),
+                    isLabelVisible: true,
+                    label: Text(
+                      '${productTabViewmodel.numOfCartItems.toString()}',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.sp,
+                      ),
+                    ),
+                    backgroundColor: Colors.red,
+                  ),
+                ],
               ),
-            ], //row
-          ),
-        ],
-      ),
+            ),
+            SizedBox(
+              width: 14,
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

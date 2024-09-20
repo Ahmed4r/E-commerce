@@ -1,5 +1,6 @@
 import 'package:app1/data/api_manager.dart';
 import 'package:app1/data/model/productTab/ProductResponse.dart';
+import 'package:app1/ui/home/Favorites/cubit/WishlistStates.dart';
 import 'package:app1/ui/home/productlist/cubit/product_tab_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,6 +18,16 @@ class ProductTabViewmodel extends Cubit<ProductTabStates> {
       numOfCartItems = response.numOfCartItems!.toInt();
       print('num of cart itmes : ${numOfCartItems}');
       emit(AddCartSuccessStates(response));
+    });
+  }
+
+  void addToWichlist(String productId) async {
+    emit(AddWichlisLoadingtstates());
+    var either = await ApiManager.addWishlist(productId);
+    either.fold((error) => emit(AddWichlisErrortstates(failures: error)),
+        (response) {
+      print('num of cart itmes : ${numOfCartItems}');
+      emit(AddWichlistSuccessstates(response: response));
     });
   }
 

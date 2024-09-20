@@ -1,3 +1,4 @@
+import 'package:app1/ui/home/cart/cartScreen.dart';
 import 'package:app1/ui/utils/appcolors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,7 +40,9 @@ class Customsearch extends StatelessWidget {
                 ),
               ))),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, Cartscreen.routename);
+                  },
                   icon: Icon(
                     Icons.shopping_cart_outlined,
                     color: Appcolors.primaryColor,

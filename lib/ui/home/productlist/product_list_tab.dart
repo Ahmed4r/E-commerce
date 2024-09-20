@@ -19,15 +19,15 @@ class ProductListTab extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 17.w),
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomsearchProduct(),
                 SizedBox(
-                  height: 24.h,
+                  height: 40.h,
                 ),
+                CustomsearchProduct(),
                 viewmodel.ProductList.isEmpty
                     ? Center(
                         child: CircularProgressIndicator(

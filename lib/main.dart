@@ -1,6 +1,7 @@
 import 'package:app1/mybloc_observer.dart';
 import 'package:app1/ui/auth/login/cubit/loginCubit.dart';
 import 'package:app1/ui/auth/register/cubit/regcubit.dart';
+import 'package:app1/ui/home/Favorites/WishList.dart';
 import 'package:app1/ui/home/cart/cartScreen.dart';
 
 import 'package:app1/ui/home/homepage.dart';
@@ -37,7 +38,8 @@ class myapp extends StatelessWidget {
               ),
           Homepage.routeName: (context) => Homepage(),
           ProductDetails.routename: (context) => ProductDetails(),
-          Cartscreen.routename: (context) => Cartscreen()
+          Cartscreen.routename: (context) => Cartscreen(),
+          FavoriteTab.routeName: (context) => FavoriteTab()
         },
       ),
     );
