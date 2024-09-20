@@ -1,6 +1,5 @@
 import 'package:app1/data/api_manager.dart';
 import 'package:app1/data/model/productTab/ProductResponse.dart';
-import 'package:app1/ui/home/cart/cubit/cartStates.dart';
 import 'package:app1/ui/home/productlist/cubit/product_tab_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -13,7 +13,6 @@ import 'package:app1/ui/utils/sharedPrefUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class myapp extends StatelessWidget {
   String route;

@@ -124,4 +124,48 @@ class ApiManager {
       return Left(NetworkError(errorMessage: 'error'));
     }
   }
+
+  static Future<Either<Failures, GetCartResponse>> deleteItemInCart(
+      String productId) async {
+    Uri url = Uri.https(baseUrl, '/api/v1/cart/${productId}');
+
+    try {
+      var token = Sharedprefutils.getData(key: 'token');
+      var response =
+          await http.delete(url, headers: {'token': token.toString()});
+      var bodyString = response.body;
+      var json = jsonDecode(bodyString);
+      var deleteItemInCart = GetCartResponse.fromJson(json);
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Right(deleteItemInCart);
+      } else {
+        return Left(ServerError(errorMessage: deleteItemInCart.message!));
+      }
+    } catch (e) {
+      return Left(NetworkError(errorMessage: 'error'));
+    }
+  }
+
+  static Future<Either<Failures, GetCartResponse>> updateCountInCart(
+      String productId, int count) async {
+    Uri url = Uri.https(baseUrl, '/api/v1/cart/${productId}');
+
+    try {
+      var token = Sharedprefutils.getData(key: 'token');
+      var response = await http.put(url,
+          body: {'count': '${count}'}, headers: {'token': token.toString()});
+      var bodyString = response.body;
+      var json = jsonDecode(bodyString);
+      var updateCountInCart = GetCartResponse.fromJson(json);
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Right(updateCountInCart);
+      } else {
+        return Left(ServerError(errorMessage: updateCountInCart.message!));
+      }
+    } catch (e) {
+      return Left(NetworkError(errorMessage: 'error'));
+    }
+  }
 }

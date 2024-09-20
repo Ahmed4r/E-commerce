@@ -1,7 +1,6 @@
 import 'package:app1/data/Failures.dart';
 import 'package:app1/data/model/AddToCart/AddToCartResponse.dart';
 import 'package:app1/data/model/productTab/ProductResponse.dart';
-import 'package:app1/ui/home/cart/cubit/cartStates.dart';
 
 abstract class ProductTabStates {}
 
