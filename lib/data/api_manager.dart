@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:app1/data/Failures.dart';
 import 'package:app1/data/model/AddToCart/AddToCartResponse.dart';
+import 'package:app1/data/model/GetFromCart/GetCart.dart';
 import 'package:app1/data/model/category/CategoryOrBrandResponse.dart';
 import 'package:app1/data/model/productTab/ProductResponse.dart';
 import 'package:app1/data/model/register/RegisterRequest.dart';
@@ -101,6 +102,26 @@ class ApiManager {
       }
     } catch (e) {
       return Left(NetworkError(errorMessage: "No Internet Connection"));
+    }
+  }
+
+  static Future<Either<Failures, GetCartResponse>> getCart() async {
+    Uri url = Uri.https(baseUrl, EndPoints.addToCart);
+
+    try {
+      var token = Sharedprefutils.getData(key: 'token');
+      var response = await http.get(url, headers: {'token': token.toString()});
+      var bodyString = response.body;
+      var json = jsonDecode(bodyString);
+      var getCartResponse = GetCartResponse.fromJson(json);
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Right(getCartResponse);
+      } else {
+        return Left(ServerError(errorMessage: getCartResponse.message!));
+      }
+    } catch (e) {
+      return Left(NetworkError(errorMessage: 'error'));
     }
   }
 }

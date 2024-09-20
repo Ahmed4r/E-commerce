@@ -1,3 +1,4 @@
+import 'package:app1/ui/home/cart/cartScreen.dart';
 import 'package:app1/ui/home/productlist/cubit/product_tab_viewmodel.dart';
 import 'package:app1/ui/utils/appcolors.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +57,7 @@ class _CustomsearchProductState extends State<CustomsearchProduct> {
                   ),
                 ),
                 onTap: () {
-                  // Navigator.of(context).pushNamed(cart.routename);
+                  Navigator.of(context).pushNamed(Cartscreen.routename);
                 },
               )
             ],
